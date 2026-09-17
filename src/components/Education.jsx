@@ -1,12 +1,15 @@
+import RevealOnScroll from './RevealOnScroll'
+
 function Education() {
   return (
     <section id="education" className="section">
       <div className="section-content">
-        <p className="section-label">Education</p>
+        <RevealOnScroll>
+          <p className="section-label">Education</p>
+          <h2>My academic journey.</h2>
+        </RevealOnScroll>
 
-        <h2>My academic journey.</h2>
-
-        <div className="education-item">
+        <RevealOnScroll as="div" className="education-item" delay={80}>
           <h3>Bachelor of Science in Computer Science</h3>
 
           <p className="education-institution">
@@ -21,9 +24,9 @@ function Education() {
             databases, artificial intelligence, operating systems, and
             information security.
           </p>
-        </div>
+        </RevealOnScroll>
 
-        <div className="education-item">
+        <RevealOnScroll as="div" className="education-item" delay={160}>
           <h3>Intermediate in Computer Science (ICS) with Physics</h3>
 
           <p className="education-institution">
@@ -31,7 +34,7 @@ function Education() {
           </p>
 
           <p className="education-duration">2022 – 2024</p>
-        </div>
+        </RevealOnScroll>
       </div>
     </section>
   )

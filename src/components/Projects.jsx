@@ -1,114 +1,71 @@
+import { lazy, Suspense, useCallback, useMemo, useState, useTransition } from 'react'
+import projects from '../data/projects'
+import ProjectCard from './ProjectCard'
+import ErrorBoundary from './ErrorBoundary'
+
+// Code-splitting: the modal's code is only fetched when a project is
+// actually opened, not as part of the main bundle.
+const ProjectModal = lazy(() => import('./ProjectModal'))
+
+const FILTERS = ['All', 'AI', 'Web', 'Database', 'Systems']
+
 function Projects() {
+  const [activeFilter, setActiveFilter] = useState('All')
+  const [selectedId, setSelectedId] = useState(null)
+
+  // useTransition: mark the filter switch as non-urgent so the click
+  // itself stays responsive even while the grid re-renders.
+  const [isPending, startTransition] = useTransition()
+
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === 'All') return projects
+    return projects.filter((project) => project.tags.includes(activeFilter))
+  }, [activeFilter])
+
+  const handleFilterChange = useCallback((filter) => {
+    startTransition(() => setActiveFilter(filter))
+  }, [])
+
+  // useCallback: keeps a stable function identity so memoized
+  // ProjectCards don't re-render just because Projects re-rendered.
+  const handleSelect = useCallback((id) => setSelectedId(id), [])
+  const handleClose = useCallback(() => setSelectedId(null), [])
+
+  const selectedProject = projects.find((p) => p.id === selectedId) ?? null
+
   return (
     <section id="projects" className="section">
       <div className="section-content">
         <p className="section-label">Projects</p>
-
         <h2>Things I have built.</h2>
 
-        <div className="projects-list">
-          <article className="project-item">
-            <h3>ElectricFix AI</h3>
-
-            <p>
-              An AI-powered lead rescue system designed to engage and recover
-              potential customers through an automated chatbot.
-            </p>
-
-            <p className="project-tech">
-              NestJS · OpenAI · Supabase · Prisma · Resend · Swagger
-            </p>
-
-            <a
-              href="https://github.com/ToobaHussain167/ElectricFix_AI"
-              target="_blank"
-              rel="noreferrer"
+        <div className="filter-bar" role="group" aria-label="Filter projects by category">
+          {FILTERS.map((filter) => (
+            <button
+              key={filter}
+              type="button"
+              className={`filter-btn ${activeFilter === filter ? 'filter-btn-active' : ''}`}
+              onClick={() => handleFilterChange(filter)}
             >
-              View on GitHub →
-            </a>
-          </article>
+              {filter}
+            </button>
+          ))}
+        </div>
 
-          <article className="project-item">
-            <h3>TrackPilot</h3>
-
-            <p>
-              A web-based project focused on building a clean and responsive
-              interface while applying practical frontend development and
-              Git-based workflows.
-            </p>
-
-            <p className="project-tech">
-              HTML · CSS · JavaScript · Bootstrap · Git · GitHub
-            </p>
-
-            <a
-              href="https://github.com/ToobaHussain167/Track_Pilot"
-              target="_blank"
-              rel="noreferrer"
-            >
-              View on GitHub →
-            </a>
-          </article>
-
-          <article className="project-item">
-            <h3>MediDesk AI</h3>
-
-            <p>
-              An AI-powered virtual clinic receptionist concept designed to
-              handle conversations and provide useful summaries to clinic
-              staff through an automated workflow.
-            </p>
-
-            <p className="project-tech">
-              Next.js · n8n · Gemini · AI Automation
-            </p>
-
-            <a
-              href="https://github.com/ToobaHussain167/Medidesk-Ai"
-              target="_blank"
-              rel="noreferrer"
-            >
-              View on GitHub →
-            </a>
-          </article>
-
-          <article className="project-item">
-            <h3>E-Commerce Database System</h3>
-
-            <p>
-              A database project designed to manage an e-commerce system,
-              including products, customers, orders, and related data while
-              applying database design and SQL concepts.
-            </p>
-
-            <p className="project-tech">
-              SQL · Database Design
-            </p>
-          </article>
-
-          <article className="project-item">
-            <h3>Escape Room Puzzle Game</h3>
-
-            <p>
-              A C++ based puzzle game where players solve a series of
-              challenges and clues to progress through an escape room
-              experience.
-            </p>
-
-            <p className="project-tech">
-              C++ · Object-Oriented Programming · Data Structures
-            </p>
-
-            <a
-              href="https://github.com/ToobaHussain167/Escape-Puzzle-Game-DSA"
-              target="_blank"
-              rel="noreferrer"
-            >
-              View on GitHub →
-            </a>
-          </article>
+        <div className={`projects-list ${isPending ? 'projects-list-pending' : ''}`}>
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} onSelect={handleSelect} />
+          ))}
         </div>
       </div>
+
+      {selectedProject && (
+        <ErrorBoundary>
+          <Suspense fallback={<div className="modal-loading">Loading details…</div>}>
+            <ProjectModal project={selectedProject} onClose={handleClose} />
+          </Suspense>
+        </ErrorBoundary>
+      )}
     </section>
   )
 }
