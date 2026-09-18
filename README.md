@@ -80,6 +80,6 @@ src/
 - LinkedIn: [tooba-hussain](https://www.linkedin.com/in/tooba-hussain-24015331a/)
 
 ## License
-This project is open source and available for personal reference. Feel free to explore the code, but please don't copy the content or design as your own.
+
 
 This project is open source and available for personal reference. Feel free to explore the code, but please don't copy the content or design as your own.
