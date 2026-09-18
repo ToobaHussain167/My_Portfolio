@@ -73,12 +73,6 @@ src/
   main.jsx        Entry point
 ```
 
-## Contact
-
-- Email: [toobahussain167@gmail.com](mailto:toobahussain167@gmail.com)
-- GitHub: [ToobaHussain167](https://github.com/ToobaHussain167)
-- LinkedIn: [tooba-hussain](https://www.linkedin.com/in/tooba-hussain-24015331a/)
-
 ## License
 
 
