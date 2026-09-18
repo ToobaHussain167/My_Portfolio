@@ -1,19 +1,85 @@
-# React + Vite
+# Tooba Hussain — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal portfolio site built with React and Vite, showcasing my projects, skills, education, and experience as a Computer Science student focused on AI automation and web development.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
+## Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- Responsive design for desktop and mobile
+- Dark / light theme toggle with saved preference (persists via `localStorage`)
+- Scroll-spy navigation that highlights the active section as you scroll
+- Scroll-reveal animations on section content
+- Animated stats counters
+- Filterable project grid with a details modal for each project
+- Contact form with real-time validation and feedback
+- Smooth "back to top" button
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+## Built With
 
-## Expanding the ESLint configuration
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- Node.js / npm
+- Plain CSS (custom properties for theming)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Advanced React concepts used
+
+- Context API + `useReducer` (global theme and toast notification state)
+- Custom hooks (scroll tracking, `localStorage` sync, click-outside detection, intersection observer)
+- `useMemo` / `useCallback` / `React.memo` (optimized project filtering)
+- `useTransition` and `useId` (React 18+ features)
+- `React.lazy` + `Suspense` (code-split project details modal)
+- Error Boundaries (class component fallback UI)
+- Portals (`createPortal`) for modals and toast notifications
+
+## Getting Started
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/ToobaHussain167/<repo-name>.git
+cd <repo-name>
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```
+src/
+  assets/        Images and static assets
+  components/     UI components (Navbar, Hero, About, Projects, Contact, etc.)
+  context/        React Context providers (Theme, Toast)
+  hooks/          Custom hooks (useScrollSpy, useLocalStorage, useInView, etc.)
+  data/           Static project data
+  App.jsx         Root component
+  main.jsx        Entry point
+```
+
+## Contact
+
+- Email: [toobahussain167@gmail.com](mailto:toobahussain167@gmail.com)
+- GitHub: [ToobaHussain167](https://github.com/ToobaHussain167)
+- LinkedIn: [tooba-hussain](https://www.linkedin.com/in/tooba-hussain-24015331a/)
+
+## License
+This project is open source and available for personal reference. Feel free to explore the code, but please don't copy the content or design as your own.
+
+This project is open source and available for personal reference. Feel free to explore the code, but please don't copy the content or design as your own.
