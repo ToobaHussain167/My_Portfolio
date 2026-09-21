@@ -38,7 +38,7 @@ Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/ToobaHussain167/<repo-name>.git
-cd <repo-name>
+cd <My_Portfolio>
 npm install
 ```
 
