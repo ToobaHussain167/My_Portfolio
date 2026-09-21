@@ -37,8 +37,8 @@ A personal portfolio site built with React and Vite, showcasing my projects, ski
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/ToobaHussain167/<repo-name>.git
-cd <My_Portfolio>
+git clone https://github.com/ToobaHussain167/My_Portfolio.git
+cd My_Portfolio
 npm install
 ```
 
